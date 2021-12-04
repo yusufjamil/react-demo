@@ -1,25 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import React,{useState} from 'react';
+import './App.css'
+import GoalList from './components/GoalList';
+import NewGoal from './components/NewGoal/NewGoal'
+const App= () => {
+  const [CourseGoals,setCourseGoals] = useState([
+{id:'cg1',text:'finish course'},
+{id:'cg2',text:'learn all about the course'},
+{id:'cg3',text:'help other students in the course q&a'}
+]);
+const addNewGoalHandler = (newGoal) => {
+  setCourseGoals(CourseGoals.concat(newGoal))
+  setCourseGoals((prevGoals) => {
+    return prevGoals.concat(newGoal);
+  })
+};
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+  return <div className="Course-goals">
+  <h2> Course Goals</h2> 
+  <NewGoal onAddGoal ={addNewGoalHandler} />
+  <GoalList goals={ CourseGoals} />
+  
+  </div>;  
+
+};
+// class App extends React.Component{
+//   render()
+//   {
+//       return <h1>Hi, <span> this </span>is react js</h1>;  
+
+//   }
+// }
 
 export default App;
